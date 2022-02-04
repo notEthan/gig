@@ -30,10 +30,14 @@ module Gig
           in_git = git_files.include?(file)
           in_fs = fs_files.include?(file)
           in_spec = spec.files.include?(file) || spec.test_files.include?(file)
+          in_ignore = ignore_files.include?(file)
 
           if in_git
             if in_fs
               if in_spec
+                if in_ignore
+                  file_error.("file is ignored, but present in gemspec: #{file}")
+                end
                 git_status = `git status --porcelain #{Shellwords.escape(file)}`
                 if git_status.empty?
                   # pass
@@ -41,7 +45,7 @@ module Gig
                   file_error.("file modified from git: #{file}")
                 end
               else
-                if ignore_files.include?(file)
+                if in_ignore
                   # pass
                 else
                   file_error.("git file not in gemspec: #{file}")
