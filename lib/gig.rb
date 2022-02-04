@@ -8,6 +8,7 @@ module Gig
     # @param gemspec_filename
     # @param ignore_files [Enumerable]
     def make_task(name: 'gig', gemspec_filename: , ignore_files: )
+      Rake.application.last_description = "check consistency of gemspec files with git and filesystem before building the gem"
       Rake::Task.define_task(name) do
         require 'shellwords'
         require 'set'
