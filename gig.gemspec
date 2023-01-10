@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email   = ["ethan@unth.net"]
 
   spec.summary     = "gig"
-  spec.description = nil
+  spec.description = "a rake task to check a gem's consistency with git and the filesystem before building"
   spec.homepage    = "https://github.com/notEthan/gig"
   spec.license     = "MIT"
 
