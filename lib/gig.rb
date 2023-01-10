@@ -6,7 +6,7 @@ module Gig
   class << self
     # @param name [#to_s] rake task name
     # @param gemspec_filename
-    # @param ignore_files [Enumerable]
+    # @param ignore_files [Enumerable<String>]
     def make_task(name: 'gig', gemspec_filename: , ignore_files: )
       Rake.application.last_description = "check consistency of gemspec files with git and filesystem before building the gem"
       Rake::Task.define_task(name) do
