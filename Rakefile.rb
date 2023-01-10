@@ -7,5 +7,4 @@ require "gig"
 
 Gig.make_task(gemspec_filename: 'gig.gemspec', ignore_files: %w(
   Rakefile.rb
-  gig.gemspec
 ))

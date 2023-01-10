@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.files = [
     'LICENSE.txt',
     'README.md',
+    'gig.gemspec',
     *Dir['lib/**/*'],
   ].reject { |f| File.lstat(f).ftype == 'directory' }
 
