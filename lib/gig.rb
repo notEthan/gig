@@ -18,8 +18,9 @@ module Gig
         fs_files = Dir.glob('**/*', File::FNM_DOTMATCH).reject { |f| File.lstat(f).ftype == 'directory' }
 
         spec = Gem::Specification.load(gemspec_filename) || abort("gemspec did not load: #{gemspec_filename}")
+        spec_files = spec.files + spec.test_files + spec.executables.map { |fn| File.join(spec.bindir, fn) }
 
-        files = Set.new + git_files + fs_files + spec.files + spec.test_files
+        files = Set.new + git_files + fs_files + spec_files
 
         file_errors = []
         file_error = -> (msg) {
@@ -30,7 +31,7 @@ module Gig
         files.each do |file|
           in_git = git_files.include?(file)
           in_fs = fs_files.include?(file)
-          in_spec = spec.files.include?(file) || spec.test_files.include?(file)
+          in_spec = spec_files.include?(file)
           in_ignore = ignore_files.include?(file)
 
           if in_spec
